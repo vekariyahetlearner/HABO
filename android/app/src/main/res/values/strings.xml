@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HeatMaps</string>
+    <string name="title_activity_main">HeatMaps</string>
+    <string name="package_name">com.heatmaps.app</string>
+    <string name="custom_url_scheme">com.heatmaps.app</string>
+</resources>

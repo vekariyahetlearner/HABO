@@ -1,0 +1,10 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/monthly_habit_widget"
+    android:minWidth="180dp"
+    android:minHeight="110dp"
+    android:minResizeWidth="150dp"
+    android:minResizeHeight="110dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="0"
+    android:configure="com.heatmaps.app.MonthlyHabitWidgetConfigureActivity"
+    android:widgetCategory="home_screen" />

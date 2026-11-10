@@ -1,0 +1,12 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_surface"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="HEATMAPS • STREAK" android:textColor="#FF9EA2AE" android:textSize="10sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:maxLines="2" android:textColor="#FFF6F7FA" android:textSize="16sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_streak" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="@drawable/widget_streak_pill" android:textColor="#FF5EEA91" android:textSize="22sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_hint" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:text="Tap to open HeatMaps" android:textColor="#FF9EA2AE" android:textSize="11sp" />
+</LinearLayout>

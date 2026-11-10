@@ -1,0 +1,11 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/widget_surface" android:gravity="center_horizontal" android:orientation="vertical">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HEATMAPS • STREAK" android:textColor="#FF9EA2AE" android:textSize="10sp" android:textStyle="bold" />
+    <Space android:layout_width="1dp" android:layout_height="0dp" android:layout_weight="1" />
+    <TextView android:id="@+id/widget_streak" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:background="@drawable/widget_streak_pill" android:gravity="center" android:includeFontPadding="false" android:textColor="#FF5EEA91" android:textSize="23sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_title" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:ellipsize="end" android:gravity="center" android:includeFontPadding="false" android:maxLines="2" android:textColor="#FFF6F7FA" android:textSize="15sp" android:textStyle="bold" />
+    <Space android:layout_width="1dp" android:layout_height="0dp" android:layout_weight="1" />
+</LinearLayout>

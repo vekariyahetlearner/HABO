@@ -1,0 +1,845 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  /* ==========================================================================
+     1. DEFAULT PALETTE TOKENS (NEO-BRUTALISM LIGHT & DARK)
+     ========================================================================== */
+  :root {
+    --canvas-bg: #FAF8F5; /* Warm Japanese washi / newsprint paper */
+    --paper-surface: #FFFFFF; /* Crisp contrast foreground surface */
+    --paper-subtle: #F5F2EB; /* Muted tactile card sub-surface */
+    --ink-primary: #0A0A0A; /* Dense carbon black ink */
+    --ink-muted: #57534E; /* Stone gray — optimal WCAG readability */
+    --border-color: #000000; /* Solid brutalist boundary */
+    --shadow-color: #000000;
+    --accent-emerald: #22C55E; /* Dopamine milestone green */
+    --accent-emerald-deep: #15803D; /* Master streak forest green */
+    --accent-yellow: #FACC15; /* Solar energy & rest */
+    --accent-cyan: #38BDF8; /* Deep-work flow state */
+    --accent-purple: #C084FC; /* Reflective creativity */
+    --accent-rose: #FB7185; /* Accountability coral */
+
+    /* Heatmap cell tokens */
+    --cell-lvl-0: #E7E5E4;
+    --cell-lvl-1: #86EFAC;
+    --cell-lvl-2: #22C55E;
+    --cell-lvl-3: #15803D;
+    --cell-skip: #FACC15;
+    --cell-fail: #FB7185;
+    --cell-frozen: #BAE6FD;
+  }
+
+  .dark {
+    --canvas-bg: #0A0A0F;
+    --paper-surface: #14141C;
+    --paper-subtle: #1C1C26;
+    --ink-primary: #F4F4F6;
+    --ink-muted: #9CA3AF;
+    --border-color: #2C2C3A;
+    --shadow-color: #000000;
+    --accent-emerald: #22C55E;
+    --accent-emerald-deep: #4ADE80;
+    --accent-yellow: #FACC15;
+    --accent-cyan: #38BDF8;
+    --accent-purple: #C084FC;
+    --accent-rose: #FB7185;
+
+    --cell-lvl-0: #1E1E28;
+    --cell-lvl-1: #14532D;
+    --cell-lvl-2: #22C55E;
+    --cell-lvl-3: #4ADE80;
+    --cell-skip: #FACC15;
+    --cell-fail: #FB7185;
+    --cell-frozen: #0369A1;
+  }
+
+  /* ==========================================================================
+     2. GOOGLE PIXEL UI (MATERIAL YOU / M3)
+     ========================================================================== */
+  [data-theme-id="pixel"] {
+    --canvas-bg: #F8F9FA;
+    --paper-surface: #FFFFFF;
+    --paper-subtle: #F1F3F4;
+    --ink-primary: #1F1F1F;
+    --ink-muted: #5F6368;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --shadow-color: rgba(0, 0, 0, 0.06);
+    --accent-emerald: #34A853;
+    --accent-emerald-deep: #137333;
+    --accent-yellow: #FDD663;
+    --accent-cyan: #8AB4F8;
+    --accent-purple: #D0BCFF;
+    --accent-rose: #F28B82;
+
+    --cell-lvl-0: #E8EAED;
+    --cell-lvl-1: #C4EED0;
+    --cell-lvl-2: #34A853;
+    --cell-lvl-3: #137333;
+    --cell-skip: #FEEFC3;
+    --cell-fail: #FCE8E6;
+    --cell-frozen: #D2E3FC;
+  }
+
+  [data-theme-id="pixel"].dark,
+  .dark[data-theme-id="pixel"] {
+    --canvas-bg: #121316;
+    --paper-surface: #1E1F24;
+    --paper-subtle: #28292E;
+    --ink-primary: #E3E3E3;
+    --ink-muted: #9AA0A6;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --accent-emerald: #81C995;
+    --accent-emerald-deep: #A8DAB5;
+    --accent-yellow: #FDD663;
+    --accent-cyan: #A8C7FA;
+    --accent-purple: #D0BCFF;
+    --accent-rose: #F6AEA9;
+
+    --cell-lvl-0: #2C2D32;
+    --cell-lvl-1: #1B3D23;
+    --cell-lvl-2: #34A853;
+    --cell-lvl-3: #81C995;
+    --cell-skip: #5C3E00;
+    --cell-fail: #5C1D1D;
+    --cell-frozen: #185ABC;
+  }
+
+  /* ==========================================================================
+     3. NORDIC WARM EDITORIAL (ZEN HYGGE)
+     ========================================================================== */
+  [data-theme-id="nordic"] {
+    --canvas-bg: #F6F4EE;
+    --paper-surface: #FAF8F4;
+    --paper-subtle: #EFECE5;
+    --ink-primary: #292524;
+    --ink-muted: #78716C;
+    --border-color: rgba(135, 120, 100, 0.22);
+    --shadow-color: rgba(110, 95, 80, 0.08);
+    --accent-emerald: #4D7C5D;
+    --accent-emerald-deep: #375943;
+    --accent-yellow: #DFBA87;
+    --accent-cyan: #7FA3A3;
+    --accent-purple: #968694;
+    --accent-rose: #C26747;
+
+    --cell-lvl-0: #E8E5DD;
+    --cell-lvl-1: #B7C9BE;
+    --cell-lvl-2: #6F9E83;
+    --cell-lvl-3: #4D7C5D;
+    --cell-skip: #DFBA87;
+    --cell-fail: #C26747;
+    --cell-frozen: #B5D2D2;
+  }
+
+  [data-theme-id="nordic"].dark,
+  .dark[data-theme-id="nordic"] {
+    --canvas-bg: #1B1A17;
+    --paper-surface: #24221D;
+    --paper-subtle: #2C2924;
+    --ink-primary: #EDE8E1;
+    --ink-muted: #A8A29E;
+    --border-color: rgba(160, 145, 125, 0.16);
+    --shadow-color: rgba(0, 0, 0, 0.35);
+    --accent-emerald: #6B9C7B;
+    --accent-emerald-deep: #4D7C5D;
+    --accent-yellow: #E6C89C;
+    --accent-cyan: #96BABA;
+    --accent-purple: #B2A2B0;
+    --accent-rose: #D47E61;
+
+    --cell-lvl-0: #262420;
+    --cell-lvl-1: #2B3D32;
+    --cell-lvl-2: #466B57;
+    --cell-lvl-3: #6B9C7B;
+    --cell-skip: #7A6240;
+    --cell-fail: #6E3B2E;
+    --cell-frozen: #2A4848;
+  }
+
+  body {
+    background-color: var(--canvas-bg);
+    color: var(--ink-primary);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* App chrome is not document content. Selection remains available in fields
+     and the two BrainDump writing surfaces, where copying is intentional. */
+  input, textarea, [contenteditable="true"], .braindump-selectable, .braindump-selectable * {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent-emerald) !important;
+    outline-offset: 2px !important;
+  }
+
+  /* ==========================================================================
+     THEME TYPOGRAPHY & IDENTITY BINDINGS
+     ========================================================================== */
+  [data-theme-id="neo-brutalist"] {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+
+  [data-theme-id="pixel"] {
+    font-family: var(--font-pixel), system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  [data-theme-id="nordic"] {
+    font-family: var(--font-pixel), -apple-system, sans-serif;
+  }
+
+  /* Theme-specific Headings & Accents */
+  [data-theme-id="nordic"] h1,
+  [data-theme-id="nordic"] h2,
+  [data-theme-id="nordic"] h3,
+[data-theme-id="nordic"] h4 {
+    font-family: var(--font-nordic), Georgia, "Times New Roman", serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.015em !important;
+  }
+
+  [data-theme-id="pixel"] h1,
+  [data-theme-id="pixel"] h2,
+  [data-theme-id="pixel"] h3,
+  [data-theme-id="pixel"] h4 {
+    font-family: var(--font-pixel), sans-serif !important;
+    letter-spacing: -0.02em !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* ==========================================================================
+   THEME-AWARE CARD, CONTAINER & MODAL UTILITIES
+   ========================================================================== */
+
+/* 1. Classic Neo-Brutalist (Default) */
+.neo-card {
+  background-color: var(--paper-surface);
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  border-radius: 0px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.neo-card-interactive {
+  background-color: var(--paper-surface);
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  border-radius: 0px;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.neo-card-interactive:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+}
+
+.neo-card-interactive:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border: 2.5px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+  border-radius: 0px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.neo-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px var(--shadow-color);
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  padding: 0.15rem 0.5rem;
+  border-radius: 0px;
+}
+
+.neo-input {
+  background-color: var(--paper-surface);
+  color: var(--ink-primary);
+  border: 2.5px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+  outline: none;
+  border-radius: 0px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.neo-input:focus {
+  transform: translate(-1px, -1px);
+  box-shadow: 4.5px 4.5px 0px var(--shadow-color);
+  border-color: var(--border-color);
+}
+
+/* ==========================================================================
+   2. GOOGLE PIXEL UI (MATERIAL YOU / M3) COMPREHENSIVE OVERRIDES
+   Organic squircles (28px), pill buttons (9999px), soft elevations, zero harsh borders
+   ========================================================================== */
+
+/* Pixel Cards, Modals, Large Containers */
+[data-theme-id="pixel"] .neo-card,
+[data-theme-id="pixel"] .neo-card-interactive,
+[data-theme-id="pixel"] [role="dialog"] > div,
+[data-theme-id="pixel"] article,
+[data-theme-id="pixel"] div[class*="shadow-[5px"],
+[data-theme-id="pixel"] div[class*="shadow-[6px"],
+[data-theme-id="pixel"] div[class*="shadow-[8px"],
+[data-theme-id="pixel"] div[class*="shadow-[10px"] {
+  border-radius: 1.75rem !important;
+  border-width: 1px !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 12px 32px -4px var(--shadow-color), 0 2px 8px -2px var(--shadow-color) !important;
+  background-color: var(--paper-surface) !important;
+}
+
+[data-theme-id="pixel"] .neo-card-interactive:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme-id="pixel"] .neo-card-interactive:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Pixel Inner Sub-Cards, Metric Boxes & Info Callouts */
+[data-theme-id="pixel"] div[class*="shadow-[1.5px"],
+[data-theme-id="pixel"] div[class*="shadow-[2px"],
+[data-theme-id="pixel"] div[class*="shadow-[3px"],
+[data-theme-id="pixel"] div[class*="shadow-[4px"],
+[data-theme-id="pixel"] div[class*="border-2"][class*="p-3"],
+[data-theme-id="pixel"] div[class*="border-2"][class*="p-4"] {
+  border-radius: 1.15rem !important;
+  border-width: 1px !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 2px 8px var(--shadow-color) !important;
+}
+
+/* Pixel Buttons: Organic Pills */
+[data-theme-id="pixel"] button,
+[data-theme-id="pixel"] .neo-btn {
+  border-radius: 9999px !important;
+  border-width: 1px !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 6px var(--shadow-color) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease !important;
+}
+
+[data-theme-id="pixel"] button:hover,
+[data-theme-id="pixel"] .neo-btn:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme-id="pixel"] button:active,
+[data-theme-id="pixel"] .neo-btn:active {
+  transform: scale(0.98) !important;
+  box-shadow: 0 1px 4px var(--shadow-color) !important;
+}
+
+/* Pixel Inputs, Selects & Date Pickers */
+[data-theme-id="pixel"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme-id="pixel"] select,
+[data-theme-id="pixel"] textarea,
+[data-theme-id="pixel"] .neo-input {
+  border-radius: 1rem !important;
+  border-width: 1px !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+[data-theme-id="pixel"] input:focus,
+[data-theme-id="pixel"] select:focus,
+[data-theme-id="pixel"] textarea:focus,
+[data-theme-id="pixel"] .neo-input:focus {
+  transform: none !important;
+  border-color: var(--accent-emerald) !important;
+  box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2) !important;
+}
+
+/* Pixel Badges, Chips & Tags */
+[data-theme-id="pixel"] .neo-badge,
+[data-theme-id="pixel"] kbd,
+[data-theme-id="pixel"] span[class*="text-[10px]"],
+[data-theme-id="pixel"] span[class*="text-[9px]"],
+[data-theme-id="pixel"] [class*="font-mono"][class*="uppercase"][class*="border"] {
+  border-radius: 9999px !important;
+  border-width: 0px !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0.2rem 0.65rem !important;
+  font-size: 0.72rem !important;
+}
+
+/* Pixel Universal Artifact Cleanser (Eliminate Hardcoded Brutalist Classes) */
+[data-theme-id="pixel"] [class*="border-black"],
+[data-theme-id="pixel"] [class*="border-stone-700"],
+[data-theme-id="pixel"] [class*="border-stone-800"] {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme-id="pixel"] [class*="border-2"],
+[data-theme-id="pixel"] [class*="border-[2"],
+[data-theme-id="pixel"] [class*="border-[3"] {
+  border-width: 1px !important;
+}
+
+[data-theme-id="pixel"] [class*="shadow-["] {
+  box-shadow: 0 4px 14px var(--shadow-color) !important;
+}
+
+[data-theme-id="pixel"] [class*="rounded-none"] {
+  border-radius: 1.15rem !important;
+}
+
+[data-theme-id="pixel"] button[class*="rounded-none"] {
+  border-radius: 9999px !important;
+}
+
+[data-theme-id="pixel"] header {
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 20px -2px var(--shadow-color) !important;
+}
+
+[data-theme-id="pixel"] header a > div {
+  border-radius: 0.85rem !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(52, 168, 83, 0.35) !important;
+}
+
+
+
+
+
+/* ==========================================================================
+   2. NORDIC WARM EDITORIAL (ZEN HYGGE) COMPREHENSIVE OVERRIDES
+   Soft organic pebble curves (20px), calming sage, diffused paper warmth
+   ========================================================================== */
+
+[data-theme-id="nordic"] .neo-card,
+[data-theme-id="nordic"] .neo-card-interactive,
+[data-theme-id="nordic"] [role="dialog"] > div,
+[data-theme-id="nordic"] article,
+[data-theme-id="nordic"] div[class*="shadow-[5px"],
+[data-theme-id="nordic"] div[class*="shadow-[6px"],
+[data-theme-id="nordic"] div[class*="shadow-[8px"],
+[data-theme-id="nordic"] div[class*="shadow-[10px"] {
+  border-radius: 1.25rem !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 20px -2px var(--shadow-color) !important;
+  background-color: var(--paper-surface);
+}
+
+[data-theme-id="nordic"] .neo-card-interactive:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px -2px rgba(110, 95, 80, 0.12) !important;
+}
+
+[data-theme-id="nordic"] button,
+[data-theme-id="nordic"] .neo-btn {
+  border-radius: 0.85rem !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 6px rgba(110, 95, 80, 0.06) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme-id="nordic"] button:hover,
+[data-theme-id="nordic"] .neo-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(110, 95, 80, 0.12) !important;
+}
+
+[data-theme-id="nordic"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme-id="nordic"] select,
+[data-theme-id="nordic"] textarea,
+[data-theme-id="nordic"] .neo-input {
+  border-radius: 0.75rem !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+[data-theme-id="nordic"] input:focus,
+[data-theme-id="nordic"] select:focus,
+[data-theme-id="nordic"] textarea:focus,
+[data-theme-id="nordic"] .neo-input:focus {
+  transform: none !important;
+  border-color: var(--accent-emerald) !important;
+  box-shadow: 0 0 0 2px rgba(77, 124, 93, 0.2) !important;
+}
+
+[data-theme-id="nordic"] .neo-badge,
+[data-theme-id="nordic"] kbd,
+[data-theme-id="nordic"] span[class*="text-[10px]"],
+[data-theme-id="nordic"] span[class*="text-[9px]"],
+[data-theme-id="nordic"] [class*="font-mono"][class*="uppercase"][class*="border"] {
+  border-radius: 9999px !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+}
+
+[data-theme-id="nordic"] [class*="border-black"],
+[data-theme-id="nordic"] [class*="border-stone-700"],
+[data-theme-id="nordic"] [class*="border-stone-800"] {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme-id="nordic"] [class*="border-2"],
+[data-theme-id="nordic"] [class*="border-[2"],
+[data-theme-id="nordic"] [class*="border-[3"] {
+  border-width: 1px !important;
+}
+
+[data-theme-id="nordic"] [class*="shadow-["] {
+  box-shadow: 0 4px 14px rgba(110, 95, 80, 0.08) !important;
+}
+
+[data-theme-id="nordic"] [class*="rounded-none"] {
+  border-radius: 0.85rem !important;
+}
+
+[data-theme-id="nordic"] header {
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 10px rgba(110, 95, 80, 0.04) !important;
+}
+
+[data-theme-id="nordic"] header a > div {
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(135, 120, 100, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(77, 124, 93, 0.2) !important;
+}
+
+/* Header branding is one compact HeatMaps lockup on every screen. Earlier
+   generic theme rules accidentally turned the text wrapper into a second,
+   oversized logo pill on mobile. */
+[data-theme-id="pixel"] header .app-brand-copy,
+[data-theme-id="nordic"] header .app-brand-copy {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+[data-theme-id="pixel"] header .app-brand-mark { border-radius: 0.85rem !important; }
+[data-theme-id="nordic"] header .app-brand-mark { border-radius: 0.75rem !important; }
+
+/* Footer Theme Adjustments */
+[data-theme-id="pixel"] footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme-id="nordic"] footer {
+  border-top: 1px solid var(--border-color) !important;
+}
+
+/* ==========================================================================
+   THEME-AWARE HEATMAP CELLS
+   ========================================================================== */
+
+/* Pixel: rounded squircles */
+[data-theme-id="pixel"] .heatmap-grid-cell,
+[data-theme-id="pixel"] button[aria-label*=": "] {
+  border-radius: 6px !important;
+  border: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+[data-theme-id="pixel"] .heatmap-grid-cell:hover,
+[data-theme-id="pixel"] button[aria-label*=": "]:hover {
+  transform: scale(1.25) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Nordic: warm pebble leaf shapes */
+[data-theme-id="nordic"] .heatmap-grid-cell,
+[data-theme-id="nordic"] button[aria-label*=": "] {
+  border-radius: 5px !important;
+  border: 1px solid rgba(135, 120, 100, 0.18) !important;
+  box-shadow: 0 1px 2px rgba(110, 95, 80, 0.06) !important;
+}
+
+/* ==========================================================================
+   THEME-SPECIFIC CHECKLIST STRIP & HIGHLIGHT OVERRIDES
+   ========================================================================== */
+
+/* Nordic: Oat Linen & Forest Sage Check-in */
+[data-theme-id="nordic"] .bg-\[\#FACC15\],
+[data-theme-id="nordic"] .bg-\[\#EAB308\] {
+  background-color: #EFECE5 !important;
+  border: 1px solid rgba(135, 120, 100, 0.28) !important;
+  box-shadow: 0 6px 20px -2px rgba(110, 95, 80, 0.08) !important;
+  color: #292524 !important;
+  border-radius: 1.25rem !important;
+}
+
+[data-theme-id="nordic"].dark .bg-\[\#FACC15\],
+.dark[data-theme-id="nordic"] .bg-\[\#FACC15\] {
+  background-color: #262420 !important;
+  border-color: rgba(160, 145, 125, 0.2) !important;
+  color: #EDE8E1 !important;
+}
+
+[data-theme-id="nordic"] .bg-\[\#FACC15\] h2,
+[data-theme-id="nordic"] .bg-\[\#EAB308\] h2 {
+  font-family: var(--font-nordic), Georgia, serif !important;
+  color: #292524 !important;
+}
+
+[data-theme-id="nordic"].dark .bg-\[\#FACC15\] h2,
+.dark[data-theme-id="nordic"] .bg-\[\#FACC15\] h2 {
+  color: #EDE8E1 !important;
+}
+
+[data-theme-id="nordic"] span.bg-\[\#22C55E\] {
+  background-color: #DDE7DE !important;
+  color: #294432 !important;
+  border-color: rgba(77, 124, 93, 0.3) !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Pixel: Gentle Material 3 Tonal Pastel Pill Container */
+[data-theme-id="pixel"] .bg-\[\#FACC15\],
+[data-theme-id="pixel"] .bg-\[\#EAB308\] {
+  background-color: #FEF7E0 !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+  color: #1F1F1F !important;
+  border-radius: 1.75rem !important;
+}
+
+[data-theme-id="pixel"].dark .bg-\[\#FACC15\],
+.dark[data-theme-id="pixel"] .bg-\[\#FACC15\] {
+  background-color: #292418 !important;
+  color: #FEEFC3 !important;
+}
+
+[data-theme-id="pixel"] span.bg-\[\#22C55E\] {
+  background-color: #C4EED0 !important;
+  color: #072711 !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.2rem 0.8rem !important;
+}
+
+
+
+/* ==========================================================================
+   CUSTOM SCROLLBARS FOR STREAK HEATMAPS & MODALS
+   ========================================================================== */
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-subtle);
+  border: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+
+[data-theme-id="pixel"] ::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme-id="pixel"].dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme-id="nordic"] ::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(135, 120, 100, 0.4);
+}
+
+/* ==========================================================================
+   NOTEBOOK & BRAINDUMP PAPERS
+   ========================================================================== */
+.notebook-paper {
+  background-color: var(--paper-surface);
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(0, 0, 0, 0.06) 31px,
+    rgba(0, 0, 0, 0.06) 32px
+  );
+  line-height: 32px;
+}
+
+.dark .notebook-paper {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(255, 255, 255, 0.04) 31px,
+    rgba(255, 255, 255, 0.04) 32px
+  );
+}
+
+.notebook-margin-line {
+  border-left: 2.5px solid var(--accent-rose);
+}
+
+.notebook-dots {
+  background-size: 20px 20px;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+}
+
+/* Checklists must use a deliberate control treatment in every theme. Native
+   browser checkbox colours and brutalist square borders were leaking into the
+   Pixel/Nordic and dark palettes. */
+.hm-checkbox,
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid var(--border-color);
+  background: var(--paper-surface);
+  border-radius: 0.2rem;
+  display: inline-grid;
+  place-content: center;
+}
+
+.hm-checkbox::before,
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.28rem;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) scale(0);
+  transition: transform 120ms ease;
+}
+
+.hm-checkbox:checked,
+input[type="checkbox"]:checked { background: var(--accent-emerald); border-color: var(--accent-emerald); }
+.hm-checkbox:checked::before,
+input[type="checkbox"]:checked::before { transform: rotate(-45deg) scale(1); }
+
+[data-theme-id="pixel"] input[type="checkbox"] { border-radius: 0.3rem; }
+[data-theme-id="nordic"] input[type="checkbox"] { border-radius: 0.35rem; }
+
+/* The editorial ruled-paper treatment is intentionally subdued outside Neo.
+   This removes harsh black rules/dots that reduce dark-theme legibility. */
+[data-theme-id="pixel"] .notebook-paper { background-image: none; border-radius: 1.25rem; }
+[data-theme-id="pixel"] .notebook-dots { background-image: none; }
+[data-theme-id="nordic"] .notebook-paper {
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(135, 120, 100, 0.12) 31px, rgba(135, 120, 100, 0.12) 32px);
+}
+[data-theme-id="nordic"].dark .notebook-paper { background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(237, 232, 225, 0.07) 31px, rgba(237, 232, 225, 0.07) 32px); }
+
+.dark .notebook-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   MASTER THEME PURIFICATION & RESIDUAL HARDCODED STYLE OVERRIDES
+   Ensures zero theme bleed, zero broken borders, and pristine fidelity.
+   ========================================================================== */
+
+/* 1. PIXEL (Material 3 Dynamic Expressive) Overrides */
+[data-theme-id="pixel"] .border-black,
+[data-theme-id="pixel"] [class*="border-[3px]"],
+[data-theme-id="pixel"] [class*="border-2"] {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme-id="pixel"] [class*="shadow-["] {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme-id="pixel"] select,
+[data-theme-id="pixel"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  border-radius: 1rem !important;
+  border-color: var(--border-color) !important;
+}
+
+/* 2. NORDIC (Warm Editorial Zen) Overrides */
+[data-theme-id="nordic"] .border-black,
+[data-theme-id="nordic"] [class*="border-[3px]"],
+[data-theme-id="nordic"] [class*="border-2"] {
+  border-color: var(--border-color) !important;
+  border-width: 1px !important;
+}
+
+[data-theme-id="nordic"] [class*="shadow-["] {
+  box-shadow: 0 6px 18px -2px rgba(110, 95, 80, 0.08) !important;
+}
+
+[data-theme-id="nordic"] select,
+[data-theme-id="nordic"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  border-radius: 0.75rem !important;
+  border-color: var(--border-color) !important;
+  border-width: 1px !important;
+  box-shadow: 0 1px 3px rgba(110, 95, 80, 0.04) !important;
+}
+
+.settings-action {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border: 1px solid var(--border-color);
+  background: var(--paper-subtle);
+  color: var(--ink-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.settings-action:active {
+  transform: translate(1px, 1px);
+}
+
+@keyframes mobile-settings-sheet-in {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mobile-settings-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mobile-settings-sheet { animation: mobile-settings-sheet-in 180ms cubic-bezier(.2,.8,.2,1) both; }
+.mobile-settings-backdrop { animation: mobile-settings-backdrop-in 150ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-settings-sheet, .mobile-settings-backdrop { animation: none; }
+}
+

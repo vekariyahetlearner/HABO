@@ -1,0 +1,48 @@
+{
+  "name": "heatmaps",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:native": "node scripts/build-native.mjs",
+    "cap:sync": "npm run build:native && cap sync",
+    "cap:android": "npm run cap:sync && cap open android",
+    "cap:ios": "npm run cap:sync && cap open ios",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --import tsx --test 'src/**/*.test.ts'"
+  },
+  "dependencies": {
+    "@capacitor/app": "^7.1.2",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/filesystem": "^7.1.9",
+    "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.52.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/ios": "^7.4.4",
+    "@tailwindcss/turbopack": "^4",
+    "@tauri-apps/cli": "^2.12.2",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
+}
